@@ -1,0 +1,26 @@
+{
+  "name": "cursor-setup",
+  "version": "1.0.0",
+  "description": "Cursor IDE rules/commands 파일을 템플릿 레포에서 선택적으로 가져오는 CLI 도구",
+  "main": "src/cli.js",
+  "bin": {
+    "cursor-setup": "bin/index.js"
+  },
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "keywords": [
+    "cursor",
+    "ide",
+    "rules",
+    "cli"
+  ],
+  "author": "chry8822",
+  "license": "MIT",
+  "dependencies": {
+    "prompts": "^2.4.2"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
