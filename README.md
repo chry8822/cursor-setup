@@ -19,6 +19,25 @@ npx cursor-setup
   - node-fetch 설치 후 현재 버전 유지 선택도 가능
 - **덮어쓰기 보호** — 이미 파일이 존재하면 덮어쓸지 확인 후 진행
 
+## 선택 가능한 파일 목록
+
+### Rules — `.cursor/rules/` 에 저장
+
+| 파일 | 설명 |
+|---|---|
+| `index.mdc` | 프로젝트 기본 컨벤션 |
+| `typescript.mdc` | TypeScript 규칙 |
+| `ai-behavior.mdc` | AI 행동 규칙 |
+
+### Commands — `.cursor/commands/` 에 저장
+
+| 파일 | 설명 |
+|---|---|
+| `check.md` | 컨벤션 + 타입 점검 |
+| `commit.md` | Git 커밋 자동화 |
+| `create-api.md` | API 서비스 전체 구조 생성 |
+| `add-api.md` | 단일 API 엔드포인트 추가 |
+
 ## 실행 예시
 
 ```
@@ -35,7 +54,8 @@ npx cursor-setup
   ── Commands ────────────────
   ◯ check.md           — 컨벤션 + 타입 점검
   ◉ commit.md          — Git 커밋 자동화
-  ◯ create-api.md      — API 파일 생성
+  ◯ create-api.md      — API 서비스 전체 구조 생성
+  ◯ add-api.md         — 단일 API 엔드포인트 추가
 
 ✅ ai-behavior.mdc    → .cursor/rules/
 ✅ commit.md          → .cursor/commands/
@@ -60,13 +80,6 @@ v18 미만 환경에서 실행 시 자동으로 안내합니다.
   수동 업그레이드 안내 보기
   종료
 ```
-
-## 적용 위치
-
-| 파일 종류 | 저장 경로 |
-|---|---|
-| rules (`*.mdc`) | `.cursor/rules/` |
-| commands (`*.md`) | `.cursor/commands/` |
 
 ## 템플릿 소스
 

@@ -1,6 +1,6 @@
 {
   "name": "cursor-setup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cursor IDE rules/commands 파일을 템플릿 레포에서 선택적으로 가져오는 CLI 도구",
   "main": "src/cli.js",
   "bin": {

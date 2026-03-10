@@ -12,7 +12,8 @@ const TEMPLATE_FILES = [
   { name: 'ai-behavior.mdc', category: 'rules', description: 'AI 행동 규칙' },
   { name: 'check.md', category: 'commands', description: '컨벤션 + 타입 점검' },
   { name: 'commit.md', category: 'commands', description: 'Git 커밋 자동화' },
-  { name: 'create-api.md', category: 'commands', description: 'API 파일 생성' },
+  { name: 'create-api.md', category: 'commands', description: 'API 서비스 전체 구조 생성' },
+  { name: 'add-api.md', category: 'commands', description: '단일 API 엔드포인트 추가' },
 ];
 
 // raw URL 생성
