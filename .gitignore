@@ -2,3 +2,4 @@ node_modules/
 *.stackdump
 .env
 .env.*
+COMMIT_MSG_TEMP.txt

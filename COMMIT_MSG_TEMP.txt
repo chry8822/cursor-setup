@@ -1,6 +1,0 @@
-feat: Skills 섹션 복구 및 ai-general-behavior 제거
-
-- fetcher.js: skills 카테고리 및 URL 생성 로직 추가, ai-general-behavior 제거
-- cli.js: Skills 그룹 메뉴 및 파일 설치 처리 추가
-- writer.js: skills 중첩 디렉토리 구조 저장 지원 추가
-- package.json: 버전 1.2.0 → 1.2.1
