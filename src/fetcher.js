@@ -12,6 +12,7 @@ const TEMPLATE_FILES = [
   { name: 'ai-behavior.mdc', category: 'rules', description: 'AI 행동 규칙' },
   { name: 'check.md', category: 'commands', description: '컨벤션 + 타입 점검' },
   { name: 'commit.md', category: 'commands', description: 'Git 커밋 자동화' },
+  { name: 'docs.md', category: 'commands', description: '커밋 전 문서 자동 업데이트' },
   { name: 'create-api.md', category: 'commands', description: 'API 서비스 전체 구조 생성' },
   { name: 'add-api.md', category: 'commands', description: '단일 API 엔드포인트 추가' },
 ];
