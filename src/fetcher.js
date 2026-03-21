@@ -15,11 +15,18 @@ const TEMPLATE_FILES = [
   { name: 'docs.md', category: 'commands', description: '커밋 전 문서 자동 업데이트' },
   { name: 'create-api.md', category: 'commands', description: 'API 서비스 전체 구조 생성' },
   { name: 'add-api.md', category: 'commands', description: '단일 API 엔드포인트 추가' },
+  { name: 'ai-analysis-behavior', category: 'skills', description: '코드 분석 · 디버깅 시 AI 행동 규칙' },
+  { name: 'ai-modification-behavior', category: 'skills', description: '파일 수정 · 구현 시 AI 행동 규칙' },
+  { name: 'ai-accuracy-behavior', category: 'skills', description: 'UI/경로/기능 설명 시 추측 단정 방지 규칙' },
 ];
 
 // raw URL 생성
-function getRawUrl(category, filename) {
-  return `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${REPO_BASE_PATH}/${category}/${filename}`;
+// skills는 .cursor/skills/{name}/SKILL.md, 나머지는 .cursor/{category}/{name}
+function getRawUrl(category, name) {
+  if (category === 'skills') {
+    return `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${REPO_BASE_PATH}/skills/${name}/SKILL.md`;
+  }
+  return `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${REPO_BASE_PATH}/${category}/${name}`;
 }
 
 // 파일 내용 fetch

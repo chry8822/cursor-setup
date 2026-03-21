@@ -10,20 +10,25 @@ async function run() {
   console.log('🎯  Cursor 설정 셋업');
   console.log('──────────────────────────────');
 
-  // rules / commands 그룹으로 분류해서 출력
+  // rules / commands / skills 그룹으로 분류해서 출력
   const rules = TEMPLATE_FILES.filter((f) => f.category === 'rules');
   const commands = TEMPLATE_FILES.filter((f) => f.category === 'commands');
+  const skills = TEMPLATE_FILES.filter((f) => f.category === 'skills');
 
   // prompts multiselect 옵션 생성
   const choices = [
-    // 그룹 구분선 (선택 불가)
     { title: '── Rules ──────────────────', disabled: true, value: null },
-    ...rules.map((f, i) => ({
+    ...rules.map((f) => ({
       title: `${f.name.padEnd(20)} — ${f.description}`,
       value: f,
     })),
     { title: '── Commands ────────────────', disabled: true, value: null },
-    ...commands.map((f, i) => ({
+    ...commands.map((f) => ({
+      title: `${f.name.padEnd(20)} — ${f.description}`,
+      value: f,
+    })),
+    { title: '── Skills ──────────────────', disabled: true, value: null },
+    ...skills.map((f) => ({
       title: `${f.name.padEnd(20)} — ${f.description}`,
       value: f,
     })),
@@ -48,17 +53,21 @@ async function run() {
 
   // 선택한 파일 fetch → 저장
   for (const file of selected) {
+    const displayName = file.category === 'skills' ? `${file.name}/SKILL.md` : file.name;
+    const destLabel = file.category === 'skills'
+      ? `${DEST_DIR.skills}/${file.name}/`
+      : `${DEST_DIR[file.category]}/`;
+
     try {
-      process.stdout.write(`⏳ ${file.name} 가져오는 중...`);
+      process.stdout.write(`⏳ ${displayName} 가져오는 중...`);
       const content = await fetchFile(file.category, file.name);
       const written = await writeFile(file.category, file.name, content);
 
       if (written) {
-        // 커서를 줄 처음으로 이동 후 덮어쓰기
-        process.stdout.write(`\r✅ ${file.name.padEnd(20)} → ${DEST_DIR[file.category]}/\n`);
+        process.stdout.write(`\r✅ ${displayName.padEnd(28)} → ${destLabel}\n`);
       }
     } catch (err) {
-      process.stdout.write(`\r❌ ${file.name.padEnd(20)} — 실패\n`);
+      process.stdout.write(`\r❌ ${displayName.padEnd(28)} — 실패\n`);
       err.message.split('\n').forEach((line) => console.log(`   ${line}`));
     }
   }
