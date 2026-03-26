@@ -21,22 +21,9 @@ npx cursor-setup
 
 ## 선택 가능한 파일 목록
 
-### Rules — `.cursor/rules/` 에 저장
+파일 목록은 **[chry8822/CursorTeamRules](https://github.com/chry8822/CursorTeamRules)** 에서 관리됩니다.
 
-| 파일 | 설명 |
-|---|---|
-| `index.mdc` | 프로젝트 기본 컨벤션 |
-| `typescript.mdc` | TypeScript 규칙 |
-| `ai-behavior.mdc` | AI 행동 규칙 |
-
-### Commands — `.cursor/commands/` 에 저장
-
-| 파일 | 설명 |
-|---|---|
-| `check.md` | 컨벤션 + 타입 점검 |
-| `commit.md` | Git 커밋 자동화 |
-| `create-api.md` | API 서비스 전체 구조 생성 |
-| `add-api.md` | 단일 API 엔드포인트 추가 |
+`npx cursor-setup` 실행 시 최신 목록을 자동으로 가져옵니다.
 
 ## 실행 예시
 

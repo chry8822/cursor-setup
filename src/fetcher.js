@@ -5,20 +5,22 @@ const REPO_NAME = 'CursorTeamRules';
 const BRANCH = 'master';
 const REPO_BASE_PATH = '.cursor'; // 레포 내 파일 루트 경로
 
-// 사용 가능한 템플릿 파일 목록
-const TEMPLATE_FILES = [
-  { name: 'index.mdc', category: 'rules', description: '프로젝트 기본 컨벤션' },
-  { name: 'typescript.mdc', category: 'rules', description: 'TypeScript 규칙' },
-  { name: 'ai-behavior.mdc', category: 'rules', description: 'AI 행동 규칙' },
-  { name: 'check.md', category: 'commands', description: '컨벤션 + 타입 점검' },
-  { name: 'commit.md', category: 'commands', description: 'Git 커밋 자동화' },
-  { name: 'docs.md', category: 'commands', description: '커밋 전 문서 자동 업데이트' },
-  { name: 'create-api.md', category: 'commands', description: 'API 서비스 전체 구조 생성' },
-  { name: 'add-api.md', category: 'commands', description: '단일 API 엔드포인트 추가' },
-  { name: 'ai-analysis-behavior', category: 'skills', description: '코드 분석 · 디버깅 시 AI 행동 규칙' },
-  { name: 'ai-modification-behavior', category: 'skills', description: '파일 수정 · 구현 시 AI 행동 규칙' },
-  { name: 'ai-accuracy-behavior', category: 'skills', description: 'UI/경로/기능 설명 시 추측 단정 방지 규칙' },
-];
+const MANIFEST_URL = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/manifest.json`;
+
+// 파일 목록을 CursorTeamRules의 manifest.json에서 동적으로 가져옴
+async function fetchManifest() {
+  const response = await fetch(MANIFEST_URL);
+
+  if (!response.ok) {
+    throw new Error(
+      `manifest.json 가져오기 실패 (HTTP ${response.status})\n` +
+      `   URL   : ${MANIFEST_URL}\n` +
+      `   원인  : 잠시 후 다시 시도해주세요.`
+    );
+  }
+
+  return response.json();
+}
 
 // raw URL 생성
 // skills는 .cursor/skills/{name}/SKILL.md, 나머지는 .cursor/{category}/{name}
@@ -49,4 +51,4 @@ async function fetchFile(category, filename) {
   return response.text();
 }
 
-module.exports = { TEMPLATE_FILES, fetchFile };
+module.exports = { fetchManifest, fetchFile };

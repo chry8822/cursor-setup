@@ -1,7 +1,7 @@
 // 인터랙티브 메뉴 UI 로직
 
 const prompts = require('prompts');
-const { TEMPLATE_FILES, fetchFile } = require('./fetcher');
+const { fetchManifest, fetchFile } = require('./fetcher');
 const { writeFile, DEST_DIR } = require('./writer');
 
 async function run() {
@@ -10,10 +10,22 @@ async function run() {
   console.log('🎯  Cursor 설정 셋업');
   console.log('──────────────────────────────');
 
+  // manifest.json에서 최신 파일 목록 가져오기
+  let templateFiles;
+  try {
+    process.stdout.write('⏳ 파일 목록 가져오는 중...');
+    templateFiles = await fetchManifest();
+    process.stdout.write('\r                              \r');
+  } catch (err) {
+    console.error('\n❌ 파일 목록을 가져오지 못했습니다.');
+    err.message.split('\n').forEach((line) => console.log(`   ${line}`));
+    process.exit(1);
+  }
+
   // rules / commands / skills 그룹으로 분류해서 출력
-  const rules = TEMPLATE_FILES.filter((f) => f.category === 'rules');
-  const commands = TEMPLATE_FILES.filter((f) => f.category === 'commands');
-  const skills = TEMPLATE_FILES.filter((f) => f.category === 'skills');
+  const rules = templateFiles.filter((f) => f.category === 'rules');
+  const commands = templateFiles.filter((f) => f.category === 'commands');
+  const skills = templateFiles.filter((f) => f.category === 'skills');
 
   // prompts multiselect 옵션 생성
   const choices = [
