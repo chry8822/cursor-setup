@@ -9,6 +9,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -20,10 +22,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Bump patch version (no git commit)
+      - name: Bump patch version
         run: npm version patch --no-git-tag-version
 
       - name: Publish
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: version bump [skip ci]"
+          git push
